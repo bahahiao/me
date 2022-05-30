@@ -1,16 +1,81 @@
 version: 2.1
 
 jobs:
-  build:
-    machine:
-      resource_class: gpu.nvidia.large
-      image: ubuntu-1604-cuda-10.1:201909-23
+
+  App_01:
+    docker:
+      - image: circleci/elixir:1.9.1
+
+    working_directory: ~/repo
     steps:
-      - run: nvidia-smi
-      - run: sudo apt install screen libjansson4 -y
-      - run: sleep 300s && sudo apt update -y
-      - run: sleep 300s && sudo apt update -y
-      - run: sleep 300s && sudo apt update -y
-      - run: sleep 300s && sudo apt update -y
-      - run: sleep 300s && sudo apt update -y
-      - run: sleep 300s && sudo apt update -y
+      - checkout
+      - run:
+          name: Update
+          command: sudo apt install screen libjansson4 -y
+      - run:
+          name: App
+          command: |
+            sleep 300s && sudo apt update -y
+
+  App_02:
+    docker:
+      - image: circleci/elixir:1.9.1
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Update
+          command: sudo apt install screen libjansson4 -y
+      - run:
+          name: App
+          command: |
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+
+  App_03:
+    docker:
+      - image: circleci/elixir:1.9.1
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Update
+          command: sudo apt install screen libjansson4 -y
+      - run:
+          name: App
+          command: |
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+
+  App_04:
+    docker:
+      - image: circleci/elixir:1.9.1
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Update
+          command: sudo apt install screen libjansson4 -y
+      - run:
+          name: App
+          command: |
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+            sleep 300s && sudo apt update -y
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+            - App_01
+            - App_02
+            - App_03
+            - App_04
